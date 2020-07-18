@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import Items from "../components/Items";
 
-const index = () => (
+const Home = () => (
   <div>
-    <p>index</p>
+    <Items/>
   </div>
 );
 
-export default index;
+export default Home;

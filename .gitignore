@@ -4,4 +4,4 @@ frontend/.next
 
 backend/node_modules
 backend/.vscode
-backend/config.js
+backend/variables.env

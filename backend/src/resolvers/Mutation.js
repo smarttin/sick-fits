@@ -1,3 +1,13 @@
-const mutations = {};
+const Mutations = {
+  async createItem(parent, args, ctx, info) {
+    // check if they are loggedd in
+    const item = await ctx.db.mutation.createItem({
+      data: {
+        ...args
+      }
+    }, info);
+    return item;
+  }
+};
 
-module.exports = mutations;
+module.exports = Mutations;
