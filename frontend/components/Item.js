@@ -5,6 +5,7 @@ import PriceTag from './styles/PriceTag';
 import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
 
 class Item extends Component {
   render() {
@@ -26,7 +27,7 @@ class Item extends Component {
         <PriceTag>{formatMoney(item.price)}</PriceTag>
         <p>{item.description}</p>
 
-        <div className="buttonlist">
+        <div className="buttonList">
           <Link
             href={{
               pathname: '/update',
@@ -36,7 +37,7 @@ class Item extends Component {
             <a>Edit</a>
           </Link>
           <button>Add to Cart</button>
-          <button>Delete</button>
+          <DeleteItem id={item.id}>Delete this item</DeleteItem>
         </div>
       </ItemStyles>
     );

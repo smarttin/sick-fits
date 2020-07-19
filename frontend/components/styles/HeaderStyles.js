@@ -13,7 +13,7 @@ export const Logo = styled.h1`
     text-transform: uppercase;
     text-decoration: none;
   }
-  @media (max-width: 1300px) {
+  @media (max-width: 1200px) {
     margin: 0;
     text-align: center;
   }
@@ -26,7 +26,7 @@ export const StyledHeader = styled.div`
     grid-template-columns: auto 1fr;
     justify-content: space-between;
     align-items: stretch;
-    @media (max-width: 1300px) {
+    @media (max-width: 1200px) {
       grid-template-columns: 1fr;
       justify-content: center
     }
