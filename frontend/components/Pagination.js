@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import Head from 'next/head';
 import Link from 'next/link';
 import { perPage } from '../config';
+import Error from './ErrorMessage';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
@@ -20,6 +21,7 @@ const Pagination = ({ page }) => (
   <Query query={PAGINATION_QUERY}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
+      if (error) return <Error error={error}/>
       const count = data.itemsConnection.aggregate.count;
       const pages = Math.ceil(count / perPage);
       return (
