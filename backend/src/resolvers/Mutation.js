@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 
+const { transport, makeANiceEmail } = require('../mail.js');
+
 const Mutations = {
   async createItem(parent, args, ctx, info) {
     // TODO: check if they are loggedd in
@@ -16,6 +18,7 @@ const Mutations = {
     );
     return item;
   },
+
   updateItem(parent, args, ctx, info) {
     // first take a copy of the update
     const updates = { ...args };
@@ -30,15 +33,16 @@ const Mutations = {
       info
     );
   },
+
   async deleteItem(parent, args, ctx, info) {
     const where = { id: args.id };
     // find the item
     const item = await ctx.db.query.item({ where }, `{ id title }`);
     // check if they own that item, or have permissions
-    // TODO
     // delete it
-    return ctx.db.mutation.deleteItem({ where }, info);
+    TODO: return ctx.db.mutation.deleteItem({ where }, info);
   },
+
   async signup(parent, args, ctx, info) {
     // lowercase the email
     args.email = args.email.toLowerCase();
@@ -65,6 +69,7 @@ const Mutations = {
     // return the user
     return user;
   },
+
   async signin(parent, { email, password }, ctx, info) {
     // check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
@@ -86,10 +91,12 @@ const Mutations = {
     // return the user
     return user;
   },
+
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie('token');
     return { message: 'Goodbye' };
   },
+
   async requestReset(parent, args, ctx, info) {
     // Check if this is a real user
     const user = await ctx.db.query.user({ where: { email: args.email } });
@@ -104,10 +111,20 @@ const Mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry },
     });
+    // Email them that reset token
+    const mailRes = await transport.sendMail({
+      from: 'fits@sick-fits.com',
+      to: user.email,
+      subject: 'Your Password Reset Token',
+      html: makeANiceEmail(`Your Password Reset Token is Here!
+      \n\n
+      <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click Here to Reset</a>
+      `),
+    });
     // console.log(res);
     return { message: 'Thanks!' };
-    // Email them that reset token
   },
+
   async resetPassword(parent, args, ctx, info) {
     // check if the passwords match
     if (args.password !== args.confirmPassword) {
@@ -144,7 +161,7 @@ const Mutations = {
     });
     // return the new user
     return updatedUser;
-  }
+  },
 };
 
 module.exports = Mutations;
