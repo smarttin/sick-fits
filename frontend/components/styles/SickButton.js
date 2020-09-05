@@ -7,8 +7,8 @@ const SickButton = styled.button`
   border: 0;
   border-radius: 0;
   text-transform: uppercase;
-  font-size: 2rem;
-  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
   transform: skew(-2deg);
   display: inline-block;
   transition: all 0.5s;
