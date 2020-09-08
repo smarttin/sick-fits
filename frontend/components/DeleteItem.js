@@ -32,8 +32,9 @@ class DeleteItem extends Component {
         variables={{ id: this.props.id }}
         update={this.update}
       >
-        {(deleteItem, { error }) => (
+        {(deleteItem, { error, loading }) => (
           <button
+            disabled={loading}
             onClick={() => {
               if (confirm('Are you sure you want to delete this item?')) {
                 deleteItem().catch((err) => {

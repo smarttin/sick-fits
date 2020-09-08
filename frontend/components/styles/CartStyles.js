@@ -17,16 +17,16 @@ const CartStyles = styled.div`
   z-index: 5;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  ${props => props.open && `transform: translateX(0);`};
+  ${(props) => props.open && `transform: translateX(0);`};
   header {
-    border-bottom: 5px solid ${props => props.theme.black};
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    border-bottom: 5px solid ${(props) => props.theme.black};
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
   }
   footer {
-    border-top: 10px double ${props => props.theme.black};
-    margin-top: 2rem;
-    padding-top: 2rem;
+    border-top: 10px double ${(props) => props.theme.black};
+    margin-top: 1rem;
+    padding-top: 1rem;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
@@ -34,6 +34,7 @@ const CartStyles = styled.div`
     font-weight: 900;
     p {
       margin: 0;
+      font-size: 2rem;
     }
   }
   ul {

@@ -4,16 +4,17 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 
 import { StyledHeader, Logo } from './styles/HeaderStyles';
+import Cart from './Cart';
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
-}
+};
 Router.onRouteChangeComplete = () => {
   NProgress.done();
-}
+};
 Router.onRouteChangeError = () => {
   NProgress.done();
-}
+};
 
 const Header = () => (
   <StyledHeader>
@@ -28,7 +29,7 @@ const Header = () => (
     <div className="sub-bar">
       <p>Search</p>
     </div>
-    <div>cart</div>
+    <Cart />
   </StyledHeader>
 );
 
