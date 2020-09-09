@@ -8,7 +8,7 @@ import Error from './ErrorMessage';
 const SingleItemStyles = styled.div`
   max-width: 800px;
   margin: 2rem auto;
-  box-shadow: ${props => props.theme.bs};
+  box-shadow: ${(props) => props.theme.bs};
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
@@ -45,22 +45,22 @@ class SingleItem extends Component {
         }}
       >
         {({ error, loading, data }) => {
-          if (error) return <Error error={error}/>
-          if (loading) return <p>Loading...</p>
-          if (!data.item) return <p>No item found for {this.props.id}</p>
+          if (error) return <Error error={error} />;
+          if (loading) return <p>Loading...</p>;
+          if (!data.item) return <p>No item found for {this.props.id}</p>;
           const item = data.item;
           return (
             <SingleItemStyles>
               <Head>
                 <title>Sick Fits | {item.title}</title>
               </Head>
-              <img src={item.largeImage} alt={item.title}/>
+              <img src={item.largeImage} alt={item.title} />
               <div className="details">
                 <h2>Viewing {item.title}</h2>
                 <p>{item.description}</p>
               </div>
             </SingleItemStyles>
-          )
+          );
         }}
       </Query>
     );
@@ -68,3 +68,4 @@ class SingleItem extends Component {
 }
 
 export default SingleItem;
+export { SINGLE_ITEM_QUERY };
