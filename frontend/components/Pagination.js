@@ -21,11 +21,11 @@ const Pagination = ({ page }) => (
   <Query query={PAGINATION_QUERY}>
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
-      if (error) return <Error error={error}/>
+      if (error) return <Error error={error} />;
       const count = data.itemsConnection.aggregate.count;
       const pages = Math.ceil(count / perPage);
       return (
-        <PaginationStyles>
+        <PaginationStyles data-test="pagination">
           <Head>
             <title>
               Sick Fits! - Page {page} of {pages}
@@ -38,10 +38,12 @@ const Pagination = ({ page }) => (
               query: { page: page - 1 },
             }}
           >
-            <a className='prev' aria-disabled={page <= 1} >← Prev</a>
+            <a className="prev" aria-disabled={page <= 1}>
+              ← Prev
+            </a>
           </Link>
           <p>
-            Page {page} of {pages}
+            Page {page} of <span className="totalPages">{pages}</span>
           </p>
           <p>{count} items total</p>
           <Link
@@ -62,3 +64,4 @@ const Pagination = ({ page }) => (
 );
 
 export default Pagination;
+export { PAGINATION_QUERY };
