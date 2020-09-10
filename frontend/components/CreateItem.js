@@ -53,7 +53,7 @@ class CreateItem extends Component {
       }
     );
     const file = await res.json();
-    console.log(file);
+    // console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
@@ -65,13 +65,14 @@ class CreateItem extends Component {
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
           <Form
+            data-test="form"
             onSubmit={async (event) => {
               // Stop the form from submitting
               event.preventDefault();
               // call the mutation
               const res = await createItem();
               // change them to the single item page
-              console.log(res);
+              // console.log(res);
               Router.push({
                 pathname: '/item',
                 query: { id: res.data.createItem.id },
@@ -89,7 +90,13 @@ class CreateItem extends Component {
                   required
                   onChange={this.uploadFile}
                 />
-                {this.state.image && <img width='200' src={this.state.image} alt='Upload Preview' />}
+                {this.state.image && (
+                  <img
+                    width="200"
+                    src={this.state.image}
+                    alt="Upload Preview"
+                  />
+                )}
               </label>
 
               <label htmlFor="title">
@@ -129,7 +136,9 @@ class CreateItem extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-          <button type="submit" disabled={loading} >Submit{loading ? 'ting..' : ''}</button>
+              <button type="submit" disabled={loading}>
+                Submit{loading ? 'ting..' : ''}
+              </button>
             </fieldset>
           </Form>
         )}
